@@ -1,1 +1,12 @@
+# Ignore environment config
 server/.env
+client/.env
+.env
+
+# Node modules
+node_modules/
+
+# Build folders
+client/build/
+server/build/
+
