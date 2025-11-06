@@ -1,0 +1,108 @@
+:root {
+  --brand: #0f766e; /* teal-700 */
+  --brand-600: #0d9488; /* teal-600 */
+  --ink: #0f172a; /* slate-900 */
+  --muted: #64748b; /* slate-500 */
+  --bg: #f8fafc; /* slate-50 */
+  --card: #ffffff;
+  --warn: #f59e0b; /* amber-500 */
+  --danger: #ef4444; /* red-500 */
+  --ok: #10b981; /* emerald-500 */
+}
+* {
+  box-sizing: border-box;
+}
+html,
+body,
+#root {
+  height: 100%;
+}
+body {
+  background: var(--bg);
+  color: var(--ink);
+}
+.navbar {
+  border-bottom: 1px solid #e2e8f0;
+}
+.brand-badge {
+  background: linear-gradient(135deg, var(--brand), var(--brand-600));
+  color: #fff;
+  border-radius: 10px;
+  padding: 0.25rem 0.5rem;
+  font-weight: 700;
+}
+.card {
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  background: var(--card);
+}
+.kpi {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  background: #fff;
+}
+.kpi .title {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.kpi .value {
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+.badge-soft {
+  background: #eef2ff;
+  color: #3730a3;
+  border-radius: 999px;
+  padding: 0.25rem 0.5rem;
+  font-weight: 600;
+}
+.badge-risk-low {
+  background: #ecfeff;
+  color: #155e75;
+}
+.badge-risk-medium {
+  background: #fffbeb;
+  color: #92400e;
+}
+.badge-risk-high {
+  background: #fef2f2;
+  color: #991b1b;
+}
+.list-unstyled {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.wave {
+  height: 48px;
+  background: #e5e7eb;
+  border-radius: 12px;
+}
+.whatsapp-banner {
+  border: 1px solid #22c55e33;
+  background: #ecfdf5;
+  color: #065f46;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.whatsapp-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #22c55e;
+  display: inline-block;
+}
+.table-sm td,
+.table-sm th {
+  padding: 0.35rem 0.5rem;
+}
+.small {
+  font-size: 0.85rem;
+}
