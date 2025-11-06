@@ -1,5 +1,7 @@
 // client/src/api.js
-const API = process.env.REACT_APP_API || "http://localhost:5000/api";
+const API =
+  process.env.REACT_APP_API_URL ||
+  "https://riverline-voice-agent.onrender.com/api";
 
 // Borrowers
 export async function fetchBorrowers() {
