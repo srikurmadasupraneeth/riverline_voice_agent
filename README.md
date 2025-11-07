@@ -8,7 +8,7 @@ It demonstrates a "founder mode" and "ships by tonight" mindset, moving from a j
 
 **Live Demo:**
 
-- **Frontend (Vercel):** [https://riverline-voice-agent-j2np.vercel.app](https://riverline-voice-agent-j2np.vercel.app)
+- **Frontend (Vercel):** [https://riverline-voice-agent-j2np-8dhxpjmv9.vercel.app/](https://riverline-voice-agent-j2np-8dhxpjmv9.vercel.app/)
 - **Backend (Render):** [https://riverline-voice-agent.onrender.com](https://riverline-voice-agent.onrender.com)
 
 ---
