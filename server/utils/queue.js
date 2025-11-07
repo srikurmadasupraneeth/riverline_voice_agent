@@ -1,5 +1,5 @@
 // server/utils/queue.js
-import { detectFakeNumber } from "./safety.js"; // ✅ IMPORT FAKE NUMBER DETECTOR
+import { detectFakeNumber } from "./safety.js"; // ✅ THIS IMPORT WAS MISSING
 
 export function computeDPD(b, today = new Date()) {
   const due = new Date(b.next_due_date);

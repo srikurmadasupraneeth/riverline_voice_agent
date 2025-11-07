@@ -1,17 +1,18 @@
+// server/controllers/borrowerController.js
 import Borrower from "../models/Borrower.js";
 import PromiseModel from "../models/Promise.js";
 import Settlement from "../models/Settlement.js";
 import Conversation from "../models/Conversation.js";
 import { classifyPersona } from "../utils/persona.js";
-import { detectFakeNumber } from "../utils/safety.js";
+import { detectFakeNumber } from "../utils/safety.js"; // ✅ THIS IMPORT WAS MISSING
 
 /** ✅ List all borrowers
- *  Also persists invalid_number_flag if detected (quick DB hygiene).
+ * Also persists invalid_number_flag if detected (quick DB hygiene).
  */
 export async function listBorrowers(req, res) {
   const list = await Borrower.find().lean();
 
-  // Persist invalid_number_flag for obviously fake numbers
+  // ✅ Persist invalid_number_flag for obviously fake numbers
   const ops = [];
   for (const b of list) {
     const isInvalid = detectFakeNumber(b.phone);
@@ -25,10 +26,12 @@ export async function listBorrowers(req, res) {
     }
   }
   if (ops.length) {
-    await Promise.allSettled(ops);
-    console.log(
-      `[Borrowers] Persisted invalid_number_flag on ${ops.length} records`
-    );
+    // We do this in the background, not blocking the response
+    Promise.allSettled(ops).then(() => {
+      console.log(
+        `[Borrowers] Persisted invalid_number_flag on ${ops.length} records`
+      );
+    });
   }
 
   res.json(list);
