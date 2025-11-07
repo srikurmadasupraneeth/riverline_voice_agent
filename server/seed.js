@@ -5,14 +5,14 @@ import Borrower from "./models/Borrower.js";
 import Policy from "./models/Policy.js";
 import { borrowers, defaultPolicy } from "./utils/seedData.js";
 
-// ✅ MongoDB TLS Fix applied here too
+// ✅ This option fixes the MongoDB SSL error for the seed script
 const mongooseOptions = {
   tlsAllowInvalidCertificates: true,
 };
 
 (async () => {
   try {
-    await mongoose.connect(config.mongoUri, mongooseOptions);
+    await mongoose.connect(config.mongoUri, mongooseOptions); // ✅ Pass the options here
     console.log("✅ Connected to MongoDB");
 
     await Borrower.deleteMany({});

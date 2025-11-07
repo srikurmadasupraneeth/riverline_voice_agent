@@ -17,10 +17,9 @@ import twilioRoutes from "./routes/twilio.js";
 
 const app = express();
 
-// CORS — restrict on deploy if needed
 app.use(
   cors({
-    origin: config.corsOrigin || "*",
+    origin: config.corsOrigin || "*", // This reads the CORS_ORIGIN from your env
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
   })
 );
@@ -43,13 +42,13 @@ app.get("/", (_, res) =>
   res.json({ ok: true, service: "riverline-voice-agent" })
 );
 
-// ✅ ADD THESE OPTIONS TO FIX THE SSL ERROR ON RENDER
+// ✅ This option fixes the MongoDB SSL error on Render
 const mongooseOptions = {
   tlsAllowInvalidCertificates: true,
 };
 
 mongoose
-  .connect(config.mongoUri, mongooseOptions) // ✅ PASS THE OPTIONS HERE
+  .connect(config.mongoUri, mongooseOptions) // ✅ Pass the options here
   .then(() =>
     app.listen(config.port, () =>
       console.log(`✅ Server running at http://localhost:${config.port}`)
