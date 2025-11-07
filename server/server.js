@@ -17,12 +17,29 @@ import twilioRoutes from "./routes/twilio.js";
 
 const app = express();
 
+// ✅ --- BRUTE FORCE CORS FIX ---
+// We are hardcoding the Vercel URL to be 100% certain.
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https"s://riverline-voice-agent-j2np.vercel.app",
+  "https://riverline-voice-agent-j2np-73x03pt9c.vercel.app", // Your other URL
+];
+
 app.use(
   cors({
-    origin: config.corsOrigin || "*", // This reads the CORS_ORIGIN from your env
+    origin: function (origin, callback) {
+      // Allow requests with no origin (like Postman) or from our allowed list
+      if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
   })
 );
+// --- END OF FIX ---
+
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json({ limit: "1mb" }));
 app.use(morgan("dev"));
@@ -42,13 +59,13 @@ app.get("/", (_, res) =>
   res.json({ ok: true, service: "riverline-voice-agent" })
 );
 
-// ✅ This option fixes the MongoDB SSL error on Render
+// This SSL fix should already be in your file
 const mongooseOptions = {
   tlsAllowInvalidCertificates: true,
 };
 
 mongoose
-  .connect(config.mongoUri, mongooseOptions) // ✅ Pass the options here
+  .connect(config.mongoUri, mongooseOptions) 
   .then(() =>
     app.listen(config.port, () =>
       console.log(`✅ Server running at http://localhost:${config.port}`)
