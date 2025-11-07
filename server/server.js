@@ -17,12 +17,13 @@ import twilioRoutes from "./routes/twilio.js";
 
 const app = express();
 
-// ✅ --- BRUTE FORCE CORS FIX ---
-// We are hardcoding the Vercel URL to be 100% certain.
+// ✅ --- BRUTE FORCE CORS FIX (Corrected URLs) ---
+// We are hardcoding all your Vercel URLs to be 100% certain.
 const allowedOrigins = [
   "http://localhost:3000",
-  "https"s://riverline-voice-agent-j2np.vercel.app",
-  "https://riverline-voice-agent-j2np-73x03pt9c.vercel.app", // Your other URL
+  "https://riverline-voice-agent-j2np.vercel.app", // Your main URL
+  "https://riverline-voice-agent-j2np-73x03pt9c.vercel.app", // Your previous URL
+  "https://riverline-voice-agent-git-a5ac6e-srikurmadasupraneeths-projects.vercel.app", // Your Git branch URL
 ];
 
 app.use(
@@ -32,6 +33,8 @@ app.use(
       if (!origin || allowedOrigins.indexOf(origin) !== -1) {
         callback(null, true);
       } else {
+        // Log the blocked origin for debugging
+        console.warn(`CORS Error: Blocked origin -> ${origin}`);
         callback(new Error("Not allowed by CORS"));
       }
     },
@@ -65,7 +68,7 @@ const mongooseOptions = {
 };
 
 mongoose
-  .connect(config.mongoUri, mongooseOptions) 
+  .connect(config.mongoUri, mongooseOptions)
   .then(() =>
     app.listen(config.port, () =>
       console.log(`✅ Server running at http://localhost:${config.port}`)
