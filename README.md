@@ -1,6 +1,6 @@
 # Riverline: AI-Powered Voice Collections Agent
 
-### A Full-Stack AI Application by [Your Name]
+### A Full-Stack AI Application by [Srikurmadasu Praneeth]
 
 This project is a high-fidelity, production-ready prototype of an AI-powered collections system, built in a 48-hour sprint in response to the Full-stack AI Engineer role at Riverline.
 
