@@ -1,3 +1,4 @@
+// server/server.js
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
@@ -42,9 +43,13 @@ app.get("/", (_, res) =>
   res.json({ ok: true, service: "riverline-voice-agent" })
 );
 
-// ✅ Production-safe Mongo connect (no tlsAllowInvalidCertificates)
+// ✅ ADD THESE OPTIONS TO FIX THE SSL ERROR ON RENDER
+const mongooseOptions = {
+  tlsAllowInvalidCertificates: true,
+};
+
 mongoose
-  .connect(config.mongoUri)
+  .connect(config.mongoUri, mongooseOptions) // ✅ PASS THE OPTIONS HERE
   .then(() =>
     app.listen(config.port, () =>
       console.log(`✅ Server running at http://localhost:${config.port}`)
