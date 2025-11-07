@@ -17,14 +17,14 @@ import twilioRoutes from "./routes/twilio.js";
 
 const app = express();
 
-// ✅ --- BRUTE FORCE CORS FIX (TYPO CORRECTED) ---
-// We are hardcoding all your Vercel URLs to be 100% certain.
+// ✅ --- FINAL CORS FIX ---
+// Added your new deployment URL to the list
 const allowedOrigins = [
   "http://localhost:3000",
   "https://riverline-voice-agent-j2np.vercel.app", // Your main URL
-  "https://riverline-voice-agent-j2np-73x03pt9c.vercel.app", // Your previous URL
-  "https://riverline-voice-agent-j2np-d8ifsavpl.vercel.app", // The one from your error log
-  "https://riverline-voice-agent-git-a5ac6e-srikurmadasupraneeths-projects.vercel.app", // Your Git branch URL
+  "https://riverline-voice-agent-j2np-8dhxpjmv9.vercel.app", // ✅ YOUR NEWEST URL
+  "https://riverline-voice-agent-j2np-d8ifsavpl.vercel.app", // Your previous error URL
+  "https://riverline-voice-agent-git-a5ac6e-srikurmadasupraneeths-projects.vercel.app", // Your working Git branch URL
 ];
 
 app.use(
@@ -62,14 +62,13 @@ app.get("/", (_, res) =>
   res.json({ ok: true, service: "riverline-voice-agent" })
 );
 
-// ✅ --- THIS IS THE CRITICAL FIX ---
-// Added the SSL fix options to the main server connection
+// This SSL fix should already be in your file
 const mongooseOptions = {
   tlsAllowInvalidCertificates: true,
 };
 
 mongoose
-  .connect(config.mongoUri, mongooseOptions) // ✅ PASS THE OPTIONS HERE
+  .connect(config.mongoUri, mongooseOptions)
   .then(() =>
     app.listen(config.port, () =>
       console.log(`✅ Server running at http://localhost:${config.port}`)
